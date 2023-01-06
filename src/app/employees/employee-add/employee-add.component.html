@@ -1,0 +1,165 @@
+
+<!--Template Driven Form-->
+<form name="employeeForm" #form="ngForm" autocomplete="off"
+(ngSubmit)="onSubmit(form)">
+
+    <!--EmployeeId Autogenerate-->
+    <div class="form-group">
+        <label>Emp Id:</label>
+    <input type="text" readonly name="empId"
+    [(ngModel)]="employeeService.formEmployeeData.empId">
+
+    </div>
+    
+     <!--Employee Name-->
+     <div class="form-group">
+        Employee Name:
+     <input type="text" 
+     name="empName"
+     #empName="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.empName"
+     class="form-control"
+     placeholder="Enter Employee Name"
+     minlength="3" maxlength="25" required
+     [ngClass]="{'is-invalid':empName.touched && empName.invalid}" />
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="empName.touched && empName.invalid">
+        <div *ngIf="empName.errors.required">
+            Employee Name is required
+        </div>
+     </div>
+     <!--Designation-->
+     <div class="form-group">
+        Designation:
+     <input type="text" 
+     name="designation"
+     #designation="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.designation"
+     class="form-control"
+     placeholder="Enter Designation"
+     minlength="3" maxlength="25" required
+     [ngClass]="{'is-invalid':designation.touched && designation.invalid}" />
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="designation.touched && designation.invalid">
+        <div *ngIf="designation.errors.required">
+            Designation is required
+        </div>
+     </div>
+     <!--DOJ-->
+     <div class="form-group">
+        DOJ:
+     <input type="date" 
+     name="dateOfJoining"
+     #dateOfJoining="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.dateOfJoining"
+     class="form-control"
+     required
+     [ngClass]="{'is-invalid':dateOfJoining.touched && dateOfJoining.invalid}" />
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="dateOfJoining.touched && dateOfJoining.invalid">
+        <div *ngIf="dateOfJoining.errors.required">
+            DOJ is required
+        </div>
+     </div>
+     <!--Salary-->
+     <div class="form-group">
+        Salary:
+     <input type="number" 
+     name="salary"
+     #salary="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.salary"
+     class="form-control"
+     placeholder="Enter salary"
+     required
+     [ngClass]="{'is-invalid':salary.touched && salary.invalid}" />
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="salary.touched && salary.invalid">
+        <div *ngIf="salary.errors.required">
+            Salary is required
+        </div>
+     </div>
+
+      <!--Salary-->
+      <div class="form-group">
+        Contact:
+     <input type="text" 
+     name="empPhoneNumber"
+     #empPhoneNumber="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.empPhoneNumber"
+     class="form-control"
+     placeholder="Enter Contact Number"
+     minlength="10" maxlength="10" required
+     [ngClass]="{'is-invalid':empPhoneNumber.touched && empPhoneNumber.invalid}" />
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="empPhoneNumber.touched && empPhoneNumber.invalid">
+        <div *ngIf="empPhoneNumber.errors.required">
+            Contact no is required
+        </div>
+     </div>
+
+      <!--Salary-->
+      <!--div class="form-group">
+        DeptId:
+     <input type="number" 
+     name="deptId"
+     #deptId="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.deptId"
+     class="form-control"
+     placeholder="Enter deptId"
+     required
+     [ngClass]="{'is-invalid':deptId.touched && deptId.invalid}" />
+     </div-->
+     <!--Validation Error Msg-->
+     <!--div class="validation-error" *ngIf="deptId.touched && deptId.invalid">
+        <div *ngIf="deptId.errors.required">
+            DeptId is required
+        </div>
+     </div-->
+     <!--Department Dropdown List-->
+      <div class="form-group">
+        Department:
+     <select 
+     name="deptId"
+     id="deptId"
+     #deptId="ngModel"
+     [(ngModel)]="employeeService.formEmployeeData.deptId"
+     class="form-control"
+     required >
+     <option value="0" selected disabled>Select Department</option>
+     <option *ngFor="let dept of employeeService.departments"
+       value="{{dept.deptId}}">{{dept.deptName}}</option>
+     </select>
+     </div>
+     <!--Validation Error Msg-->
+     <div class="validation-error" *ngIf="deptId.touched && deptId.invalid">
+        <div *ngIf="deptId.errors.required">
+            DeptId is required
+        </div>
+     </div>
+
+     <!--IsActive-->
+     <div class="form-group">
+        <div class="form-check">
+            <label class="form-check-lable">In Service</label>
+            <input type="checkbox" name="isActive"
+            #isActive="ngModel"
+            id="IsActive"
+            [(ngModel)]="employeeService.formEmployeeData.isActive"
+            class="form-check-input"
+            />
+        </div>
+     </div>
+
+     <!--Submit-->
+     <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-primary form-control"
+        [disabled]="!(form.valid && form.dirty)">Submit</button>
+
+     </div>
+
+</form>
